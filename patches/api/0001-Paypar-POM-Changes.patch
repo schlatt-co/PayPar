@@ -1,0 +1,34 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: JRoy <joshroy126@gmail.com>
+Date: Tue, 30 Jun 2020 13:25:41 -0400
+Subject: [PATCH] Paypar POM Changes
+
+
+diff --git a/pom.xml b/pom.xml
+index dfc7c2f351c895a7378b13f88ca8efcaaf38d478..c0a8fda701042d8263f3be06b59c91105e27b30b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -3,18 +3,17 @@
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+-        <groupId>com.destroystokyo.paper</groupId>
+-        <artifactId>paper-parent</artifactId>
++        <groupId>co.schlatt</groupId>
++        <artifactId>paypar-parent</artifactId>
+         <version>dev-SNAPSHOT</version>
+     </parent>
+ 
+-    <groupId>com.destroystokyo.paper</groupId>
+-    <artifactId>paper-api</artifactId>
++    <artifactId>paypar-api</artifactId>
+     <version>1.16.1-R0.1-SNAPSHOT</version>
+     <packaging>jar</packaging>
+ 
+-    <name>Paper-API</name>
+-    <url>https://github.com/PaperMC/Paper</url>
++    <name>Paypar-API</name>
++    <url>https://github.com/schlatt-co/PayPar</url>
+     <description>An enhanced plugin API for Minecraft servers.</description>
+ 
+     <properties>
