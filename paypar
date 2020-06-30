@@ -92,7 +92,7 @@ case "$1" in
     ;;
     "setup")
         if [[ -f ~/.bashrc ]] ; then
-            NAME="ec"
+            NAME="paypar"
             if [[ ! -z "${2+x}" ]] ; then
                 NAME="$2"
             fi
