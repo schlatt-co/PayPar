@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Spottedleaf <spottedleaf@spottedleaf.dev>
-Date: Tue, 30 Jun 2020 13:57:10 -0400
+Date: Sat, 4 Apr 2020 15:27:44 -0700
 Subject: [PATCH] Allow controlled flushing for network manager
 
 Only make one flush call when emptying the packet queue too

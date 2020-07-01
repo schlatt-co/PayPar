@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Spottedleaf <spottedleaf@spottedleaf.dev>
-Date: Tue, 30 Jun 2020 14:20:35 -0400
+Date: Mon, 4 May 2020 10:06:24 -0700
 Subject: [PATCH] Highly optimise single and multi-AABB VoxelShapes and
  collisions
 
@@ -501,7 +501,7 @@ index 1cb45f97b644347d16b66b46113b1e4455004fd3..e60ad41b22ddeeae4923a5b7b2999f2f
          T t0 = this.h.a(this.a.a(i));
  
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371f8ef9818 100644
+index 67cba48771bc86f20232ce8fe0845879d2d03bf4..f8ca56be883417ed947c5bbc11bbe732ebcf593f 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -136,7 +136,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
@@ -513,19 +513,26 @@ index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371
      public boolean noclip;
      public float I;
      protected final Random random;
-@@ -625,7 +625,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
-         return this.onGround;
+@@ -655,6 +655,10 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+         return this.moveStartZ;
      }
- 
+     // Tuinity end - detailed watchdog information
++
 +    boolean collidedOnSomething; // Tuinity - optimise collisions
 +    boolean requiredRelaxedCollisionCheck; // Tuinity - optimise collisions
 +
      public void move(EnumMoveType enummovetype, Vec3D vec3d) {
+         // Tuinity start - detailed watchdog information
+         com.tuinity.tuinity.util.TickThread.ensureTickThread("Cannot move an entity off-main");
+@@ -664,6 +668,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+             this.moveStartZ = this.locZ();
+             this.moveVector = vec3d;
+         }
 +        this.collidedOnSomething = false; // Tuinity - optimise collisions
+         try {
+         // Tuinity end - detailed watchdog information
          if (this.noclip) {
-             this.a(this.getBoundingBox().c(vec3d));
-             this.recalcPosition();
-@@ -653,7 +657,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -693,7 +698,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
              // Paper end
  
              vec3d = this.a(vec3d, enummovetype);
@@ -535,7 +542,7 @@ index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371
  
              if (vec3d1.g() > 1.0E-7D) {
                  this.a(this.getBoundingBox().c(vec3d1));
-@@ -850,6 +855,138 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -897,6 +903,138 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
          return d0;
      }
  
@@ -674,7 +681,7 @@ index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371
      private Vec3D f(Vec3D vec3d) {
          AxisAlignedBB axisalignedbb = this.getBoundingBox();
          VoxelShapeCollision voxelshapecollision = VoxelShapeCollision.a(this);
-@@ -885,6 +1022,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -932,6 +1070,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
          return vec3d1;
      }
  
@@ -682,7 +689,7 @@ index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371
      public static double b(Vec3D vec3d) {
          return vec3d.x * vec3d.x + vec3d.z * vec3d.z;
      }
-@@ -1091,6 +1229,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -1138,6 +1277,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
  
  
      @Nullable public final AxisAlignedBB getCollisionBox(){return ay();} //Paper - OBFHELPER
@@ -690,7 +697,7 @@ index fcb3d3adae52fd70e856344a727a344cf78cfce3..b54555c757ac614360f8673a0bea2371
      @Nullable public AxisAlignedBB ay() {
          return null;
      }
-@@ -1971,8 +2110,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -2018,8 +2158,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
      }
  
      public final AxisAlignedBB getHardCollisionBox(Entity entity){ return j(entity);}//Paper - OBFHELPER
@@ -730,10 +737,10 @@ index 267a6baae89c181eed545e6758fac7115eb3882f..0edcb775e965a3d6539d44e49480068d
                  return entity == null || !entity.isSameVehicle(entity1);
              });
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 0134e7cbb57efce3dce712e94cfd53273e10be3e..931243d05edbeb11ab7268220e066a64a7103a16 100644
+index 90371bfec14a6c3acb33a3605a21a09ccf9fc5d5..29295875ce22cefb1c09ce13e691934088ec3bb8 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1260,6 +1260,8 @@ public abstract class MinecraftServer extends IAsyncTaskHandlerReentrant<TickTas
+@@ -1316,6 +1316,8 @@ public abstract class MinecraftServer extends IAsyncTaskHandlerReentrant<TickTas
          }
          // Paper end
  
@@ -1036,10 +1043,10 @@ index 1fa7061f7adb539b6786fa11a0090f2c188ba9f2..f6f3bdc61dadca13088ea8d261fa4a90
              throw (IllegalArgumentException) SystemUtils.c(new IllegalArgumentException());
          } else if (voxelshape == voxelshape1) {
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index b598c48692ff340a081995384aeecf9a2266d10f..02d448cdb85461d4987295b220110ce724a9a441 100644
+index a1d1badcadba8d941ad4005b1bd33922f6075d55..da9c0564980c3e01ca0e74aa07ddbac89b1a5a53 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -1125,6 +1125,11 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
+@@ -1131,6 +1131,11 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
      public List<Entity> getHardCollidingEntities(@Nullable Entity entity, AxisAlignedBB axisalignedbb, Predicate<Entity> predicate) {
          // copied from below
          List<Entity> list = Lists.newArrayList();
@@ -1051,7 +1058,7 @@ index b598c48692ff340a081995384aeecf9a2266d10f..02d448cdb85461d4987295b220110ce7
          int i = MathHelper.floor((axisalignedbb.minX - 2.0D) / 16.0D);
          int j = MathHelper.floor((axisalignedbb.maxX + 2.0D) / 16.0D);
          int k = MathHelper.floor((axisalignedbb.minZ - 2.0D) / 16.0D);
-@@ -1148,8 +1153,13 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
+@@ -1154,8 +1159,13 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
  
      @Override
      public List<Entity> getEntities(@Nullable Entity entity, AxisAlignedBB axisalignedbb, @Nullable Predicate<? super Entity> predicate) {
@@ -1139,10 +1146,10 @@ index b651eb87bb23deeb2a3f4a1c626ddde9b11a7b9e..5cba3b0e613bb6c016c4441ebb931be9
          return this.j.d();
      }
 diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java/net/minecraft/server/WorldServer.java
-index 3a740f5669876271a3f13c64e28eb6f2cb033b4c..5914764d5b11e39621ae0b424c98f1f4175cd268 100644
+index 9a3e8392b75ab1084a525fd28479241b31c9d3db..6657b2f8e48e55cecc86566c5581ee42d42b8b85 100644
 --- a/src/main/java/net/minecraft/server/WorldServer.java
 +++ b/src/main/java/net/minecraft/server/WorldServer.java
-@@ -260,6 +260,349 @@ public class WorldServer extends World implements GeneratorAccessSeed {
+@@ -354,6 +354,349 @@ public class WorldServer extends World implements GeneratorAccessSeed {
          this.asyncChunkTaskManager = new com.destroystokyo.paper.io.chunk.ChunkTaskManager(this); // Paper
      }
  

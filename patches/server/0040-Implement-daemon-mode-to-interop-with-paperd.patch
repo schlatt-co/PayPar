@@ -1403,10 +1403,10 @@ index 0000000000000000000000000000000000000000..3c88bffdc75f107ccf3b72cb9e17c221
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/server/DedicatedServer.java b/src/main/java/net/minecraft/server/DedicatedServer.java
-index 8b2755a3b95e472e884976195d1d3551fc260e39..eaf4b1019bce2a6a089621ce3384d63516f2f799 100644
+index 578f7809cb09e746778d05b153e02c569f0d1d90..b4d9f56624a03d85eaa719ac764ea77af279db80 100644
 --- a/src/main/java/net/minecraft/server/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/DedicatedServer.java
-@@ -368,8 +368,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
+@@ -369,8 +369,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
              //this.remoteStatusListener.b(); // Paper - don't wait for remote connections
          }
  
@@ -1418,7 +1418,7 @@ index 8b2755a3b95e472e884976195d1d3551fc260e39..eaf4b1019bce2a6a089621ce3384d635
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 931243d05edbeb11ab7268220e066a64a7103a16..9330a13f3ccb25ee51b5283f4c26a39f42642792 100644
+index 29295875ce22cefb1c09ce13e691934088ec3bb8..ffff0f5c0e7ec38a214e5f488d19e42524ec859d 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -865,6 +865,7 @@ public abstract class MinecraftServer extends IAsyncTaskHandlerReentrant<TickTas
@@ -1438,7 +1438,7 @@ index 931243d05edbeb11ab7268220e066a64a7103a16..9330a13f3ccb25ee51b5283f4c26a39f
              if (throwable instanceof ThreadDeath) {
                  MinecraftServer.LOGGER.error("Main thread terminated by WatchDog due to hard crash", throwable);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d043be1e87196e34f7a4c12e4d7d4b8941b7905b..bdc6614b20ac5d9518436b277bcd243afd164c0f 100644
+index 65c5940b33ad6309695832d9d8884c9a6016f7f2..30abc634d989b399b0a5b5056a9faee5d38703a1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -239,7 +239,7 @@ public final class CraftServer implements Server {
@@ -1451,7 +1451,7 @@ index d043be1e87196e34f7a4c12e4d7d4b8941b7905b..bdc6614b20ac5d9518436b277bcd243a
      private final Map<String, World> worlds = new LinkedHashMap<String, World>();
      private YamlConfiguration configuration;
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index a5c7ef4ffdae8ea5b62b23d39a7106835c194353..d7169e46ee5bc5a960a57569ce4b6e17902ca85f 100644
+index caf243734d01b08308ddf6e848ea7c13e6260ca6..42965078c17c45eb68659c67abe4fe5ef5d7eadb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -19,6 +19,8 @@ public class Main {
@@ -1605,10 +1605,10 @@ index 123de5ac9026508e21cdc225f0962f5c3c46fed5..418a381e84a735c26c2cea6eb4dc4e54
      }
      // Paper end
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 513c1041c34ebb3ac1775674a3f4526693759c08..6a68dd6d51c82b8448cece84ca4deebb7544db91 100644
+index 4d310908489953d6d061b2358f614142edacb62e..9952817a703f0cb919be7302f3670bd593bb5b5f 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -140,11 +140,12 @@ public class WatchdogThread extends Thread
+@@ -219,11 +219,12 @@ public class WatchdogThread extends Thread
                  {
                  if ( !server.hasStopped() )
                  {

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # get base dir regardless of execution location
 SOURCE="${BASH_SOURCE[0]}"
+BRANCH="ver/1.16"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
     SOURCE="$(readlink "$SOURCE")"
@@ -13,7 +14,7 @@ git submodule update --init --recursive
 if [[ "$1" == up* ]]; then
     (
         cd "$basedir/Paper/"
-        git fetch && git reset --hard origin/master
+        git fetch && git reset --hard origin/$BRANCH
         cd ../
         git add Paper
     )

@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Spottedleaf <spottedleaf@spottedleaf.dev>
-Date: Tue, 30 Jun 2020 13:57:33 -0400
+Date: Sat, 4 Apr 2020 17:00:20 -0700
 Subject: [PATCH] Consolidate flush calls for entity tracker packets
 
 Most server packets seem to be sent from here, so try to avoid
@@ -22,10 +22,10 @@ With this change I could get all 200 on at 0ms ping.
 So in general this patch should reduce Netty I/O thread load.
 
 diff --git a/src/main/java/net/minecraft/server/ChunkProviderServer.java b/src/main/java/net/minecraft/server/ChunkProviderServer.java
-index ef980f9859d1d7d0d5e13d0d70e998055f92135e..ebdb3409ff16ed3d644697f563f0bed2071ed72c 100644
+index 7fe22848a30c4c0af99bda9592fc4f7efc56acbc..7323be4e3acdf88d25759fb5dea4c1b95fd5722a 100644
 --- a/src/main/java/net/minecraft/server/ChunkProviderServer.java
 +++ b/src/main/java/net/minecraft/server/ChunkProviderServer.java
-@@ -860,7 +860,25 @@ public class ChunkProviderServer extends IChunkProvider {
+@@ -1018,7 +1018,25 @@ public class ChunkProviderServer extends IChunkProvider {
              this.world.getMethodProfiler().exit();
          }
  
