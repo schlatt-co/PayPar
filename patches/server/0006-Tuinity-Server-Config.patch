@@ -312,7 +312,7 @@ index d043be1e87196e34f7a4c12e4d7d4b8941b7905b..0e613e120ada272afb305aea8fcd16bb
          public void restart() {
              org.spigotmc.RestartCommand.restart();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index a5c7ef4ffdae8ea5b62b23d39a7106835c194353..caf243734d01b08308ddf6e848ea7c13e6260ca6 100644
+index 34756f93087a0ce429dd501fd6ca09286bb78e81..2a6d4fd0027d28fca7bbdef116fe05b6e845222e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -138,6 +138,13 @@ public class Main {

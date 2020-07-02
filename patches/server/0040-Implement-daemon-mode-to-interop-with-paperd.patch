@@ -1451,7 +1451,7 @@ index 65c5940b33ad6309695832d9d8884c9a6016f7f2..30abc634d989b399b0a5b5056a9faee5
      private final Map<String, World> worlds = new LinkedHashMap<String, World>();
      private YamlConfiguration configuration;
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index caf243734d01b08308ddf6e848ea7c13e6260ca6..42965078c17c45eb68659c67abe4fe5ef5d7eadb 100644
+index 2a6d4fd0027d28fca7bbdef116fe05b6e845222e..dc0ae92bea990b92e4f5c9a090104e54b9fafba6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -19,6 +19,8 @@ public class Main {

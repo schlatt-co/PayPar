@@ -31,7 +31,7 @@ index 3bbc2d78b38f3e6353e80c7d99c16bef74a4d6c1..d043be1e87196e34f7a4c12e4d7d4b89
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 83151f3d7e9703f99391d24c41e90fc5ce1a80e7..a5c7ef4ffdae8ea5b62b23d39a7106835c194353 100644
+index a8cd55d3c288f2f1c0f7f9392f2f08f12f69f969..34756f93087a0ce429dd501fd6ca09286bb78e81 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -252,7 +252,7 @@ public class Main {
