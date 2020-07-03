@@ -1438,10 +1438,10 @@ index 29295875ce22cefb1c09ce13e691934088ec3bb8..ffff0f5c0e7ec38a214e5f488d19e425
              if (throwable instanceof ThreadDeath) {
                  MinecraftServer.LOGGER.error("Main thread terminated by WatchDog due to hard crash", throwable);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 65c5940b33ad6309695832d9d8884c9a6016f7f2..30abc634d989b399b0a5b5056a9faee5d38703a1 100644
+index a28c12f82c0eb2b5954b6c5e581637989e8aec75..788627de78f5783d8430ec345a25a2068f3951cf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -239,7 +239,7 @@ public final class CraftServer implements Server {
+@@ -241,7 +241,7 @@ public final class CraftServer implements Server {
      private final SimpleHelpMap helpMap = new SimpleHelpMap(this);
      private final StandardMessenger messenger = new StandardMessenger();
      private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap);
