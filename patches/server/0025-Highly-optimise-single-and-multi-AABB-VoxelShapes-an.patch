@@ -501,7 +501,7 @@ index 1cb45f97b644347d16b66b46113b1e4455004fd3..e60ad41b22ddeeae4923a5b7b2999f2f
          T t0 = this.h.a(this.a.a(i));
  
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 67cba48771bc86f20232ce8fe0845879d2d03bf4..818afb4f493e80b31d885a51a3dbe751069ddfd9 100644
+index a7fe3d78c390d44488a16c847522c3dffe975abb..3db19a9bab8ffdc42f280a27c867bf7d1a1ab9e7 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -136,7 +136,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
@@ -679,7 +679,7 @@ index 67cba48771bc86f20232ce8fe0845879d2d03bf4..818afb4f493e80b31d885a51a3dbe751
      @Nullable public AxisAlignedBB ay() {
          return null;
      }
-@@ -2018,8 +2147,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -2021,8 +2150,8 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
      }
  
      public final AxisAlignedBB getHardCollisionBox(Entity entity){ return j(entity);}//Paper - OBFHELPER
@@ -1062,7 +1062,7 @@ index a1d1badcadba8d941ad4005b1bd33922f6075d55..da9c0564980c3e01ca0e74aa07ddbac8
          int j = MathHelper.floor((axisalignedbb.maxX + 2.0D) / 16.0D);
          int k = MathHelper.floor((axisalignedbb.minZ - 2.0D) / 16.0D);
 diff --git a/src/main/java/net/minecraft/server/WorldBorder.java b/src/main/java/net/minecraft/server/WorldBorder.java
-index b651eb87bb23deeb2a3f4a1c626ddde9b11a7b9e..5cba3b0e613bb6c016c4441ebb931be9dba8db4e 100644
+index b651eb87bb23deeb2a3f4a1c626ddde9b11a7b9e..96c808531ec5885743fd83ce04b527ef9ed0b125 100644
 --- a/src/main/java/net/minecraft/server/WorldBorder.java
 +++ b/src/main/java/net/minecraft/server/WorldBorder.java
 @@ -47,11 +47,43 @@ public class WorldBorder {
@@ -1103,8 +1103,7 @@ index b651eb87bb23deeb2a3f4a1c626ddde9b11a7b9e..5cba3b0e613bb6c016c4441ebb931be9
      public double a(Entity entity) {
          return this.b(entity.locX(), entity.locZ());
      }
--
-+    
+ 
      public final VoxelShape asVoxelShape(){ return c();} // Paper - OBFHELPER
 +    public final VoxelShape getCollisionShape() { return this.c(); } // Tuinity - OBFHELPER
      public VoxelShape c() {

@@ -1438,7 +1438,7 @@ index 29295875ce22cefb1c09ce13e691934088ec3bb8..ffff0f5c0e7ec38a214e5f488d19e425
              if (throwable instanceof ThreadDeath) {
                  MinecraftServer.LOGGER.error("Main thread terminated by WatchDog due to hard crash", throwable);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a28c12f82c0eb2b5954b6c5e581637989e8aec75..788627de78f5783d8430ec345a25a2068f3951cf 100644
+index 3ed0dd670cc8c0b025a97eeb74bd4998d9df32fd..24107dec827b68f6614a246a8103fcc4eac85639 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -241,7 +241,7 @@ public final class CraftServer implements Server {
@@ -1451,7 +1451,7 @@ index a28c12f82c0eb2b5954b6c5e581637989e8aec75..788627de78f5783d8430ec345a25a206
      private final Map<String, World> worlds = new LinkedHashMap<String, World>();
      private YamlConfiguration configuration;
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 2a6d4fd0027d28fca7bbdef116fe05b6e845222e..dc0ae92bea990b92e4f5c9a090104e54b9fafba6 100644
+index 2b195896bd2aae65dca32d52f8e1521d457e1ba3..830acf3630ff77d020b8756ec102c866fe5b91fe 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -19,6 +19,8 @@ public class Main {

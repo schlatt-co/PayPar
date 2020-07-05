@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # get base dir regardless of execution location
 SOURCE="${BASH_SOURCE[0]}"
-BRANCH="ver/1.16"
+BRANCH="master"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
     SOURCE="$(readlink "$SOURCE")"
